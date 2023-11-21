@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
 import {useTelegram} from "../../hooks/useTelegram";
-import {useCallback, useEffect} from "react";
 
 const products = [
     {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
@@ -51,7 +50,7 @@ const ProductList = () => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
         let newItems = [];
 
-        if(alreadyAdded) {
+        if (alreadyAdded) {
             newItems = addedItems.filter(item => item.id !== product.id);
         } else {
             newItems = [...addedItems, product];
@@ -59,7 +58,7 @@ const ProductList = () => {
 
         setAddedItems(newItems)
 
-        if(newItems.length === 0) {
+        if (newItems.length === 0) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
