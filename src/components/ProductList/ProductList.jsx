@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import './ProductList.css';
-import ProductItem from "../ProductItem/ProductItem";
 import {useTelegram} from "../../hooks/useTelegram";
 
 const products = [
@@ -36,15 +35,17 @@ const ProductList = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
+        }).then(r => () => {
+            console.log(`Response: ${r}`)
         })
-    }, [addedItems])
+    }, [addedItems, queryId])
 
     useEffect(() => {
         tg.onEvent('mainButtonClicked', onSendData)
         return () => {
             tg.offEvent('mainButtonClicked', onSendData)
         }
-    }, [onSendData])
+    }, [onSendData, tg])
 
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
@@ -69,10 +70,8 @@ const ProductList = () => {
     }
 
     return (
-        <div className={'list'}>
-            {products.map(item => (
-                <ProductItem product={item} onAdd={onAdd} className={'item'} key={item.id}/>
-            ))}
+        <div className='list'>
+            
         </div>
     );
 };
