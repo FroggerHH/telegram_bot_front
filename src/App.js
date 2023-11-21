@@ -1,6 +1,7 @@
 import './App.css';
 import {useEffect} from "react";
 import {useTelegram} from "./hooks/useTelegram";
+import Header from "./components/Header/Header";
 
 function App() {
     const {tg} = useTelegram();
@@ -12,6 +13,7 @@ function App() {
 
     return (
         <div className="App">
+            <Header/>
             <p>Hello World 1</p>
         </div>
     );
