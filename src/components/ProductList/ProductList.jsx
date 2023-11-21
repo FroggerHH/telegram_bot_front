@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import './ProductList.css';
 import {useTelegram} from "../../hooks/useTelegram";
+import ProductItem from "../ProductItem/ProductItem";
 
 const products = [
     {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
@@ -24,28 +25,38 @@ const ProductList = () => {
     const {tg, queryId} = useTelegram();
 
     const onSendData = useCallback(() => {
-        const data = {
-            products: addedItems,
-            totalPrice: getTotalPrice(addedItems),
-            queryId,
+        try {
+            const data = {
+                products: addedItems,
+                totalPrice: getTotalPrice(addedItems),
+                queryId,
+            }
+            fetch('http://192.168.0.78:8000/web-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            }).then(r => () => {
+                console.log(`Response: ${r}`)
+            })
+        } catch (e) {
+            console.log(e)
         }
-        fetch('http://192.168.0.78:8000/web-data', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        }).then(r => () => {
-            console.log(`Response: ${r}`)
-        })
     }, [addedItems, queryId])
 
+
     useEffect(() => {
-        tg.onEvent('mainButtonClicked', onSendData)
-        return () => {
-            tg.offEvent('mainButtonClicked', onSendData)
-        }
-    }, [onSendData, tg])
+            try {
+                tg.onEvent('mainButtonClicked', onSendData)
+                tg.offEvent('mainButtonClicked', onSendData)
+            } catch
+                (e) {
+                console.log(e)
+            }
+        }, [onSendData, tg]
+    )
+
 
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
@@ -70,8 +81,10 @@ const ProductList = () => {
     }
 
     return (
-        <div className='list'>
-            
+        <div className={'list'}>
+            {products.map(item => (
+                <ProductItem product={item} onAdd={onAdd} className={'item'} key={item.id}/>
+            ))}
         </div>
     );
 };
