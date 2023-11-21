@@ -11,7 +11,8 @@ function App() {
 
     useEffect(() => {
         tg.ready();
-    }, [])
+        tg.expand();
+    }, [tg])
 
     return (
         <div className="App">
