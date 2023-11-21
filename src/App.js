@@ -1,7 +1,8 @@
 import './App.css';
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useTelegram} from "./hooks/useTelegram";
 import Header from "./components/Header/Header";
+import {Routes} from "react-router-dom";
 
 function App() {
     const {tg} = useTelegram();
@@ -13,8 +14,11 @@ function App() {
 
     return (
         <div className="App">
-            <Header/>
             <p>Hello World 1</p>
+            <p>Hello World 2</p>
+            <Header/>
+            <Routes>
+            </Routes>
         </div>
     );
 }
