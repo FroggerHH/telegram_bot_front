@@ -10,7 +10,7 @@ const ProductList = () => {
             const request = new XMLHttpRequest()
             request.responseType = 'json'
             request.open('GET', 'http://localhost:3001/products')
-            console.log(`Sending request..., request: ${request}`)
+            console.log(`Sending request..., request: `, request)
             request.send()
             products = JSON.parse(request.response)
         } catch (e) {
