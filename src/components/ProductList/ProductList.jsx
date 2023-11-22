@@ -6,6 +6,16 @@ import ProductItem from "../ProductItem/ProductItem";
 const ProductList = () => {
         const {tg} = useTelegram();
         let products = []
+        try {
+            const request = new XMLHttpRequest()
+            request.responseType = 'json'
+            request.open('GET', 'http://localhost:3001/products')
+            console.log(`Sending request..., request: ${request}`)
+            request.send()
+            products = JSON.parse(request.response)
+        } catch (e) {
+            console.log(e)
+        }
 
         const onSendData = useCallback(() => {
             try {
