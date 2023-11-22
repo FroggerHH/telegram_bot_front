@@ -3,16 +3,6 @@ import './ProductList.css';
 import {useTelegram} from "../../hooks/useTelegram";
 import ProductItem from "../ProductItem/ProductItem";
 
-const products = [
-    {id: '1', title: 'Джинсы', price: 5000, description: 'Синего цвета, прямые'},
-    {id: '2', title: 'Куртка', price: 12000, description: 'Зеленого цвета, теплая'},
-    {id: '3', title: 'Джинсы 2', price: 5000, description: 'Синего цвета, прямые'},
-    {id: '4', title: 'Куртка 8', price: 122, description: 'Зеленого цвета, теплая'},
-    {id: '5', title: 'Джинсы 3', price: 5000, description: 'Синего цвета, прямые'},
-    {id: '6', title: 'Куртка 7', price: 600, description: 'Зеленого цвета, теплая'},
-    {id: '7', title: 'Джинсы 4', price: 5500, description: 'Синего цвета, прямые'},
-    {id: '8', title: 'Куртка 5', price: 12000, description: 'Зеленого цвета, теплая'},
-]
 
 const getTotalPrice = (items = []) => {
     return items.reduce((acc, item) => {
@@ -23,6 +13,21 @@ const getTotalPrice = (items = []) => {
 const ProductList = () => {
     const [addedItems, setAddedItems] = useState([]);
     const {tg, queryId} = useTelegram();
+
+    let products = []
+    try {
+        fetch('http://5.35.9.71:8000/api/get-products', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(r => {
+            console.log(`Get products response: ${r}`)
+            products = r.json()
+        })
+    } catch (e) {
+        console.log(e)
+    }
 
     const onSendData = useCallback(() => {
         try {
@@ -38,7 +43,7 @@ const ProductList = () => {
                 },
                 body: JSON.stringify(data)
             }).then(r => () => {
-                console.log(`Response: ${r}`)
+                console.log(`Web data response: ${r}`)
             })
         } catch (e) {
             console.log(e)
