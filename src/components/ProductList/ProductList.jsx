@@ -1,35 +1,18 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './ProductList.css';
 import {useTelegram} from "../../hooks/useTelegram";
 import ProductItem from "../ProductItem/ProductItem";
-
-const axios = require('axios');
-
+import getProducts from "../../api";
 
 const ProductList = () => {
         const {tg} = useTelegram();
-        let products = []
-        try {
-            const apiUrl = 'http://5.35.9.71:8000/api/get-products';
-            axios.get(apiUrl)
-                .then(response => {
-                    console.log('Ответ от сервера:', response.data);
-                    products = JSON.parse(response.data)
-                    console.log(products)
-                })
-                .catch(error => {
-                    console.error('Ошибка при отправке запроса:', error);
-                    products =
-                        [{
-                            id: 1,
-                            title: 'Товар 1',
-                            description: 'Описание 1',
-                            price: 1000
-                        }]
-                });
-        } catch (e) {
-            console.log(e)
-        }
+        const [products, setProducts] = useState([]);
+        if (products.length === 0)
+            try {
+                getProducts(setProducts)
+            } catch (e) {
+                console.log(e)
+            }
 
         const onSendData = useCallback(() => {
             try {
