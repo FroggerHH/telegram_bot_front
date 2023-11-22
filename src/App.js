@@ -10,7 +10,7 @@ function App() {
         console.log(`Telegram object is not defined`)
 
         document.documentElement.style.setProperty('--tg-theme-bg-color', '#17212b');
-        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', '#f1f0f6');
+        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', '#232e3c');
         document.documentElement.style.setProperty('--tg-theme-text-color', '#e9e9e9');
         document.documentElement.style.setProperty('--tg-theme-button-color', '#5ac7f9');
         document.documentElement.style.setProperty('--tg-theme-button-text-color', '#e8f0fa');
