@@ -9,7 +9,7 @@ const ProductItem = ({product}) => {
             <div className={'title'}>{product?.title}</div>
             <div className={'description'}>{product?.description}</div>
             <div className={'price'}>
-                <span>Стоимость: <b>{product}</b></span>
+                <span>Стоимость: <b>{product?.price}</b></span>
             </div>
             <Button className={'add-btn'}>
                 Добавить в корзину
