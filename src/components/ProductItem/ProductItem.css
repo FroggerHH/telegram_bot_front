@@ -4,15 +4,20 @@
     border: 1px solid var(--tg-theme-button-color);
     padding: 15px;
     width: 170px;
+
+    border-radius: 3px;
 }
 
 
-.img {
+.product-img {
     width: 100%;
     background: lightgray;
     height: 100px;
     margin: 0 auto;
     background: var(--tg-theme-button-color);
+
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
 }
 
 .description {

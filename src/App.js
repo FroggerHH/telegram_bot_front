@@ -5,7 +5,17 @@ import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
 
 function App() {
-    const {tg} = useTelegram();
+    const {tg, user} = useTelegram();
+    if (user === undefined || user === null || tg === undefined || tg === null) {
+        console.log(`Telegram object is not defined`)
+
+        document.documentElement.style.setProperty('--tg-theme-bg-color', '#17212b');
+        document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', '#f1f0f6');
+        document.documentElement.style.setProperty('--tg-theme-text-color', '#e9e9e9');
+        document.documentElement.style.setProperty('--tg-theme-button-color', '#5ac7f9');
+        document.documentElement.style.setProperty('--tg-theme-button-text-color', '#e8f0fa');
+        document.documentElement.style.setProperty('--tg-theme-hint-color', '#747575');
+    }
 
     useEffect(() => {
         tg.ready();
@@ -14,8 +24,6 @@ function App() {
 
     return (
         <div className="App">
-            <p>Hello World 1</p>
-            <p>Hello World 2</p>
             <Header/>
             <ProductList/>
         </div>

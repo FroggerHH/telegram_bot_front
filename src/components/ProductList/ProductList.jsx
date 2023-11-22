@@ -3,16 +3,30 @@ import './ProductList.css';
 import {useTelegram} from "../../hooks/useTelegram";
 import ProductItem from "../ProductItem/ProductItem";
 
+const axios = require('axios');
+
+
 const ProductList = () => {
         const {tg} = useTelegram();
         let products = []
         try {
-            const request = new XMLHttpRequest()
-            request.responseType = 'json'
-            request.open('GET', 'http://localhost:3001/products')
-            console.log(`Sending request..., request: `, request)
-            request.send()
-            products = JSON.parse(request.response)
+            const apiUrl = 'http://5.35.9.71:8000/api/get-products';
+            axios.get(apiUrl)
+                .then(response => {
+                    console.log('Ответ от сервера:', response.data);
+                    products = JSON.parse(response.data)
+                    console.log(products)
+                })
+                .catch(error => {
+                    console.error('Ошибка при отправке запроса:', error);
+                    products =
+                        [{
+                            id: 1,
+                            title: 'Товар 1',
+                            description: 'Описание 1',
+                            price: 1000
+                        }]
+                });
         } catch (e) {
             console.log(e)
         }
@@ -33,7 +47,8 @@ const ProductList = () => {
                     (e) {
                     console.log(e)
                 }
-            }, [onSendData, tg]
+            },
+            [onSendData, tg]
         )
 
         return (

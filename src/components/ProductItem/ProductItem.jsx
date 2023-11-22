@@ -5,7 +5,7 @@ import './ProductItem.css';
 const ProductItem = ({product}) => {
     return (
         <div className={'product'}>
-            <div className={'img'}/>
+            <img className={'product-img'} src={product?.image} alt={''}/>
             <div className={'title'}>{product?.title}</div>
             <div className={'description'}>{product?.description}</div>
             <div className={'price'}>
