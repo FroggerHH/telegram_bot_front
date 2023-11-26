@@ -2,7 +2,8 @@ import './App.css';
 import React from "react";
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
-import {Form, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
+import Form from "./components/Form/Form";
 
 function App() {
     document.documentElement.style.setProperty('--bg-color', '#17212b');
