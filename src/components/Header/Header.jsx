@@ -1,12 +1,13 @@
 import React from 'react';
 import './Header.css';
-import Button from "../Button/Button";
+import {NavLink} from "react-router-dom";
+import "../NavLink/NavLink.css";
 
 const Header = () => {
     return (
         <div className={'header'}>
-            <Button onClick={() => window.location.href = '/'}> Гдавная </Button>
-            <Button onClick={() => window.location.href = '/form'}> Форма </Button>
+            <NavLink to={'/'}> Гдавная </NavLink>
+            <NavLink to={'/form'}> Форма </NavLink>
             <span className={'username'}>
                 username
             </span>

@@ -1,0 +1,12 @@
+a{
+    padding: 10px 15px;
+    color: var(--text-color);
+
+    margin: 5px 0;
+
+    text-decoration: none;
+}
+
+.active{
+    text-decoration: underline;
+}

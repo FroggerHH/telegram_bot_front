@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import './ProductList.css';
 import ProductItem from "../ProductItem/ProductItem";
-import getProducts from "../../api";
+import Api from "../../api.js";
 
 const ProductList = () => {
         const [products, setProducts] = useState([]);
         if (products.length === 0)
             try {
-                getProducts(setProducts)
+                Api.getProducts(setProducts)
             } catch (e) {
                 console.log(e)
             }

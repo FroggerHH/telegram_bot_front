@@ -13,6 +13,7 @@ function App() {
     document.documentElement.style.setProperty('--button-text-color', '#e8f0fa');
     document.documentElement.style.setProperty('--hint-color', '#747575');
 
+
     return (
         <div className="App">
             <Header/>
@@ -22,6 +23,12 @@ function App() {
             </Routes>
         </div>
     );
+}
+
+function OnResize() {
+    if (window.innerWidth < 600) {
+        console.log('small')
+    }
 }
 
 export default App;
